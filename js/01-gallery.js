@@ -49,23 +49,5 @@ function closeModal() {
     instance.close();
 }
 };
-
-    
-/* const onOpenModal = () => {
-    instance.show();
-    window.addEventListener('keydown', onEscKeyPress);
-};
-
-const onCloseModal = () => {
-    instance.close();
-    window.removeEventListener('keydown', onEscKeyPress);
-};
-
-function onEscKeyPress(e) {
-    if (e.code === "Escape" && basicLightbox.visible()) {
-        onCloseModal();
-    }
-};
-     */
     
 console.log(galleryItems);
