@@ -2,16 +2,13 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
 const gallery = document.querySelector('.gallery'); // Створюємо змінну - посилання на галерею в HTML
+const onOpenModalEsc = document.body
 
 gallery.addEventListener('click', onImageClick);
 
 const markedGallery = markupGallery(galleryItems); //Присвоюємо результат функції markupGallery на основі масиву даних galleryItems у змінну
 
 gallery.innerHTML = markedGallery; // Додаєм змінну з розміткою(рядок) в HTML
-
-const galleryItem = gallery.querySelector('.gallery__item');
-const galleryLink = gallery.querySelector('.gallery__link');
-const galleryImage = gallery.querySelector('.gallery__image');
 
 // Створюємо функцію для розмітки галереї. 
 
@@ -26,12 +23,49 @@ function markupGallery(items) {
     }).join(''); // обєднання масиву обєктів в рядок
 };
 
-function onImageClick(e, gallery) {
-    if (!e.target.nodeName === 'IMG') {
+function onImageClick(e) {
+    if (!e.target.classList.contains("gallery__image")) {
         return;
     }
-    preventDefault();
-    showModal(e.target.dataset.source.value);
-}
+    e.preventDefault();
+    
+    // готовa розміткa модального вікна із зображенням з прикладів бібліотеки basicLightbox
+    const instance = basicLightbox.create(`
+    <img src="${e.target.dataset.source}" width="" height="">
+`)
+    instance.show();
+    document.addEventListener("keydown", onEscapePress);
+    document.body.classList.add(".js-open-modal");
 
+function onEscapePress(e) {
+    if (e.code === "Escape" && basicLightbox.visible()) {
+    closeModal();
+  }
+};
+
+function closeModal() {
+    document.removeEventListener("keydown", onEscapePress);
+    document.body.classList.remove(".js-close-modal");
+    instance.close();
+}
+};
+
+    
+/* const onOpenModal = () => {
+    instance.show();
+    window.addEventListener('keydown', onEscKeyPress);
+};
+
+const onCloseModal = () => {
+    instance.close();
+    window.removeEventListener('keydown', onEscKeyPress);
+};
+
+function onEscKeyPress(e) {
+    if (e.code === "Escape" && basicLightbox.visible()) {
+        onCloseModal();
+    }
+};
+     */
+    
 console.log(galleryItems);
