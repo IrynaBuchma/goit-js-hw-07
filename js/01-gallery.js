@@ -2,13 +2,13 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
 const gallery = document.querySelector('.gallery'); // Створюємо змінну - посилання на галерею в HTML
-const onOpenModalEsc = document.body
+
 
 gallery.addEventListener('click', onImageClick);
 
 const markedGallery = markupGallery(galleryItems); //Присвоюємо результат функції markupGallery на основі масиву даних galleryItems у змінну
 
-gallery.innerHTML = markedGallery; // Додаєм змінну з розміткою(рядок) в HTML
+gallery.innerHTML = markedGallery; // Вставляємо рядок з розміткою (змінну markedGallery) в HTML
 
 // Створюємо функцію для розмітки галереї. 
 
